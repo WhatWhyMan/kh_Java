@@ -30,12 +30,14 @@ public class ClientBackground {
 	public void connection() {	// Client가 서버에 접속.
 		
 		try {
+			// 서버와 연결
 			socket = new Socket("127.0.0.1", 7777);
+			// 서버와 입/출력 통로 생성
 			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			
-			bw.write(nickname+"\n 님이 접속하셨습니다.");
-			// bw.flush
+			bw.write(nickname+"\n");
+			bw.flush();
 			
 			// Server와 입력 통로가 끊어지지 않았다면 계속 반복함.
 			// Server에서 수신받은 msg
@@ -48,13 +50,12 @@ public class ClientBackground {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	public void sendMessage(String msg) {
 		// server에 msg 전달
 		try {
 			bw.write(msg + "\n");
-	//		bw.flush();
+			bw.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
