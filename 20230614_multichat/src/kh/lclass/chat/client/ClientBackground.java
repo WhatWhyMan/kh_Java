@@ -68,7 +68,4 @@ public class ClientBackground {
 	public void setGui(ClientGUI gui) {
 		this.gui = gui;
 	}
-	
-	
-	
 }
