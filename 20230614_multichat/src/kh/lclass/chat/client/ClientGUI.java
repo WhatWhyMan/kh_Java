@@ -45,6 +45,7 @@ public class ClientGUI extends JFrame implements ActionListener {
 	public void appendMSG(String msg) {
 		// jta(채팅방)에 msg를 추가함.
 		jta.append(msg);
+		jta.append("\n");
 	}
 	
 	public void actionPerformed(ActionEvent e) {

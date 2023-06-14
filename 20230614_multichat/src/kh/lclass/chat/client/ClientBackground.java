@@ -35,7 +35,7 @@ public class ClientBackground {
 			// 서버와 입/출력 통로 생성
 			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-			
+			// 접속하면
 			bw.write(nickname+"\n");
 			bw.flush();
 			
@@ -54,8 +54,9 @@ public class ClientBackground {
 	public void sendMessage(String msg) {
 		// server에 msg 전달
 		try {
-			bw.write(msg + "\n");
+			bw.write(nickname+":"+msg+"\n");
 			bw.flush();
+			gui.appendMSG(msg);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
