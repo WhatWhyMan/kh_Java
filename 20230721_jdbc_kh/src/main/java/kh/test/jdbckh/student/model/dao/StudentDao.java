@@ -12,6 +12,54 @@ import kh.test.jdbckh.student.model.vo.StudentVo;
 
 public class StudentDao {
 // PPT 내용구현
+	// DB에서 tb_student 테이블의 전달받은 학번을 통해 학생 1명의 상세정보를 읽어옴.
+	public StudentVo selectOneStudent(String studentNo) {
+		System.out.println("DAO selectOneStudent() arg:"+ studentNo);
+		
+		StudentVo result = null;
+		String query = "select * from tb_student join tb_department using(department_no) where student_no = "+"'"+studentNo+"'";
+	
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "kh", "kh");
+//			if(conn==null) {
+//				System.out.println("연결실패");
+//			}
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = new StudentVo();
+				// While 동작 시킬 필요 없음. Query 결과가 단일행이므로
+				result.setAbsenceYn(rset.getString("Absence_Yn"));
+				result.setCoachProfessorNo(rset.getString("Coach_Professor_No"));
+				result.setDepartmentNo(rset.getString("Department_No"));
+				result.setEntranceDate(rset.getString("Entrance_Date"));
+				result.setStudentAddress(rset.getString("Student_Address"));
+				result.setStudentName(rset.getString("Student_Name"));
+				result.setStudentNo(rset.getString("Student_No"));
+				result.setStudentSsn(rset.getString("Student_Ssn"));
+				result.setDepartmentName(rset.getString("Department_name"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rset!=null) rset.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+//		System.out.println(result);
+		
+		return result;
+	}
 	
 	public List<StudentVo> selectListStudent() {
 		List<StudentVo> result = null;
@@ -69,7 +117,6 @@ public class StudentDao {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(result);
 		return result;
 	}
 	

@@ -20,17 +20,21 @@ public class StudentVo {
 	private String entranceDate;
 	private String absenceYn;
 	private String coachProfessorNo;
+	private String departmentName;
+
 	@Override
 	public String toString() {
 		return "StudentVo [studentNo=" + studentNo + ", departmentNo=" + departmentNo + ", studentName=" + studentName
 				+ ", studentSsn=" + studentSsn + ", studentAddress=" + studentAddress + ", entranceDate=" + entranceDate
-				+ ", absenceYn=" + absenceYn + ", coachProfessorNo=" + coachProfessorNo + "]";
-	}
-	public String getStudentNo() {
-		return studentNo;
+				+ ", absenceYn=" + absenceYn + ", coachProfessorNo=" + coachProfessorNo + ", departmentName="
+				+ departmentName + "]";
 	}
 	public void setStudentNo(String studentNo) {
 		this.studentNo = studentNo;
+	}
+	
+	public String getStudentNo() {
+		return studentNo;
 	}
 	public String getDepartmentNo() {
 		return departmentNo;
@@ -73,6 +77,12 @@ public class StudentVo {
 	}
 	public void setCoachProfessorNo(String coachProfessorNo) {
 		this.coachProfessorNo = coachProfessorNo;
+	}
+	public String getDepartmentName() {
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 	
 }
