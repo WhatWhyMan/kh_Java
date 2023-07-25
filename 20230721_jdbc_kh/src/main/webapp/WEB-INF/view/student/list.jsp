@@ -10,16 +10,29 @@
 </head>
 <body>
 	<h2>학생 리스트</h2>
+	<div>
+	<form action="<%=request.getContextPath() %>/student/list">
+		<input type="search" name="searchWord">
+		<input type="submit" name="">
+	</form>
+	</div>
 	<% 
-	String a = (String)request.getAttribute("aaa");
-	String b = (String)request.getAttribute("bbb");
-	int c = (int)request.getAttribute("ccc");
+
 	List<StudentVo> volist = (List<StudentVo>)request.getAttribute("studentList");
+	String searchWord = (String)request.getAttribute("searchWord");
+	if(searchWord != null){
+		%>
+		<h3><%=searchWord %>검색결과</h3>
+		<h3><a href="<%=request.getContextPath() %>/student/list">전체보기</a></h3>
+		<%
+	}
+	
+	if (volist.size() < 1){
 	%>
-	<%-- <%= a %> --%> 
-	<%-- <%= b %> --%>
-	<%-- <%= c %> --%>
-	<%-- <%= volist %> --%>
+	<h2>결과물이 없습니다.</h2>
+	<%
+	} else {
+	%>
 	<table border="1">
 		<tr>
 			<td>학번</td>
@@ -42,5 +55,18 @@
 		}
 		%>
 	</table>
+	<div>
+	<%
+		for(int i=1; i<=10; i++)	{
+	%>
+		<a href="<%=request.getContextPath()%>/student/list?pageNo=<%=i%>"><span><%=i%></span></a>
+		,
+	<%
+	}
+	%>
+	</div>
+	<%
+	}
+	%>
 </body>
 </html>
