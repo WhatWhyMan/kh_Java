@@ -4,9 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>교수 목록</title>
+<title>학과 리스트</title>
 </head>
 <body>
-	<h1>교수 목록</h1>
+	<h2>학과 리스트</h2>
+[[ ${deptList }]]
+	<table border="1">
+		<tr>
+			<td>학과번호</td>
+			<td>학과이름</td>
+			<td>계열</td>
+			<td>개설여부</td>
+			<td>정원</td>
+		</tr>
+	</table>
 </body>
 </html>

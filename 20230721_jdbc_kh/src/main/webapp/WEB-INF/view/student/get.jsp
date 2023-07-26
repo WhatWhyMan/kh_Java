@@ -9,24 +9,27 @@
 </head>
 <body>
 	<h1>학생 상세 정보</h1>
-	<% 
-	String a = (String)request.getAttribute("aaa");
-	String b = (String)request.getAttribute("bbb");
-	int c = (int)request.getAttribute("ccc");
-	StudentVo vos = (StudentVo)request.getAttribute("student");
+	<%-- <%= request.getAttribute("svo") %> --%>
+	<%
+	StudentVo vo = null;
+	if(request.getAttribute("svo") instanceof StudentVo){
+		vo = (StudentVo)request.getAttribute("svo");
+	}
 	%>
 	<table border="1">
 		<tr>
-			<td>학번</td>
 			<td>이름</td>
-			<td>학과이름</td>
-			
+			<td><%=vo.getStudentName() %></td>
 		</tr>
 		<tr>
-			<td><%=vos.getStudentNo() %></td>
-			<td><%=vos.getStudentName() %></td>
-			<td><%=vos.getDepartmentName() %></td>
+			<td>소속학과번호</td>
+			<td><%=vo.getDepartmentNo() %></td>
+		</tr>
+		<tr>
+			<td>소속학과이름</td>
+			<td><%=vo.getDepartmentName() %></td>
 		</tr>
 	</table>
+	
 </body>
 </html>
