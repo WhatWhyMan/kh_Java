@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +19,9 @@
 			<input type="submit" value="찾기">
 		</form>
 	</div>
-	 
+<c:if test="${!empty searchWord} }">
+
+</c:if>
 <%
 // JSP Tag - java문법
 List<StudentVo> volist = (List<StudentVo>)request.getAttribute("studentList");
