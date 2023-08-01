@@ -262,7 +262,7 @@ public class StudentDao {
 				vo.setStudentAddress( rs.getString("Student_Address"));
 //				vo.setEntranceDate( rs.getDate("Entrance_Date") );
 				vo.setEntranceDate( rs.getString("Entrance_Date") );
-				vo.setStudentSsn( rs.getString("STUDENT_SSN") );
+				
 				result.add(vo);
 			}
 		} catch (SQLException e) {
@@ -310,7 +310,7 @@ public class StudentDao {
 	public List<StudentVo> selectListStudent(Connection conn, int currentPage, int pageSize, int totalCnt , String searchWord) {  // 페이징처리+검색
 		List<StudentVo> result = new ArrayList<StudentVo>();
 		String query= " select * from "
-				+ " (\r\n"
+				+ " ( "
 				+ " select tb1.*, rownum rn from"
 				+ "    (select STUDENT_NO,DEPARTMENT_NO,STUDENT_NAME,STUDENT_SSN, STUDENT_ADDRESS ,to_char(ENTRANCE_DATE,'yyyy-mm-dd') ENTRANCE_DATE, ABSENCE_YN, COACH_PROFESSOR_NO from tb_student"
 				+ " 			where student_name like ? or student_address like ?"
@@ -323,6 +323,7 @@ public class StudentDao {
 		
 		int startRownum = 0;
 		int endRownum = 0;
+		System.out.println("총글개수:"+totalCnt);
 		startRownum = (currentPage-1)*pageSize +1;
 		endRownum = ((currentPage*pageSize) > totalCnt) ? totalCnt: (currentPage*pageSize);
 		System.out.println("startRownum:"+startRownum);
@@ -352,7 +353,6 @@ public class StudentDao {
 				vo.setStudentAddress( rs.getString("Student_Address"));
 //				vo.setEntranceDate( rs.getDate("Entrance_Date") );
 				vo.setEntranceDate( rs.getString("Entrance_Date") );
-				vo.setStudentSsn(rs.getString("STUDENT_SSN"));
 				
 				result.add(vo);
 			}
@@ -362,6 +362,7 @@ public class StudentDao {
 			close(rs);
 			close(pstmt);
 		}
+
 		//  확인용 System.out.println(result);
 		return result;
 	}

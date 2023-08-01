@@ -16,7 +16,7 @@ import kh.test.jdbckh.student.model.vo.StudentVo;
 /**
  * Servlet implementation class StudentListController
  */
-@WebServlet("/student/list")
+@WebServlet({"/student/list", "/aaa"})
 public class StudentListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,7 +25,6 @@ public class StudentListController extends HttpServlet {
      */
     public StudentListController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,7 +32,7 @@ public class StudentListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("/student/list doGet() 진입");
-		// 1. 전달받은 parameter 읽어내기
+		//// 1. 전달받은 parameter 읽어내기
 		String searchWord = request.getParameter("searchWord");
 		String pageNoStr = request.getParameter("pageNo");
 		// String --> int
@@ -46,7 +45,7 @@ public class StudentListController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		// 2. 전달받은 데이터를 활용해
+		//// 2. 전달받은 데이터를 활용해 
 		// 2. DB학생 상세 정보 가져오기
 		StudentService service = new StudentService(); 
 		//List<StudentVo> result = null;
@@ -61,7 +60,7 @@ public class StudentListController extends HttpServlet {
 			// 페이징
 			map = service.selectListStudent(currentPage, 10);
 		}
-		//3. DB로부터 전달받은 데이터를 JSP에 전달함.
+		// 3. DB로부터 전달받은 데이터를 JSP에 전달함.
 		request.setAttribute("studentList", map.get("studentList"));
 		// 페이징 - 
 		int pageBlockSize = 5;
@@ -78,19 +77,18 @@ public class StudentListController extends HttpServlet {
 		request.setAttribute("startPageNum", startPageNum);
 		request.setAttribute("endPageNum", endPageNum);
 		request.setAttribute("currentPage", currentPage);
-
+		
 		if(searchWord != null) {
 			request.setAttribute("searchWord", searchWord);
 		}
 		// 4. JSP 파일 forward로 열기
 		request.getRequestDispatcher("/WEB-INF/view/student/list.jsp").forward(request, response);
-		}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
 //		doGet(request, response);
 //	}
 

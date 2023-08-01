@@ -4,14 +4,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<% String ctxtPath = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>EL - </title>
+<link href="<%=ctxtPath %>/resources/css/reset.css" rel="stylesheet">
+<script src="<%=ctxtPath %>/resources/js/jquery-3.7.0.js"></script>
 </head>
 <body>
-<h2> EL </h2>
+    <%@ include file="/WEB-INF/view/header.jsp" %>
+
+
+<img alt="contextPath 없으면 경로 맞지 않음" src="/resources/images/top_logo.jpg"><br>
+<img alt="jpg테스트" src="<%=request.getContextPath() %>/resources/images/top_logo.jpg"><br>
+<img alt="png테스트" src="<%=request.getContextPath() %>/resources/images/17419544428574.png"><br>
+<img alt="svg테스트" src="<%=request.getContextPath() %>/resources/images/a.svg"><br>
+
 <h2> EL-ExpressionLanguage <br>단점: java for/if/변수 사용 불가<br>보완:jstl의 foreach/if/set변수 사용 </h2>
 
 c:if는 true false 조건만 가능함 - else 없음.
@@ -52,9 +62,9 @@ c:if는 true false 조건만 가능함 - else 없음.
 <hr>
 ${vo.studentSsn }
 <hr>
-<%-- ${volist.get(2).bwriteDate } --%>
+${volist.get(2).bwriteDate }
 <br>이렇게도 나옴<br>
-<%-- ${volist[2].bwriteDate } --%>
+${volist[2].bwriteDate }
 
 <hr>
 ${a1 } : <%= request.getAttribute("a1") %> <br>
